@@ -1,24 +1,22 @@
-const { Observable } = rxjs.Observable;
 const { ajax } = rxjs.ajax;
 const { Rx, fromEvent, combineLatest } = rxjs;
 const { map, tap, switchMap, catchError } = rxjs.operators;
 
-const input = document.querySelector("input");
-const select = document.querySelector("select");
+const schoolMark = document.querySelector("input");
+const markType = document.querySelector("select");
 const output = document.querySelector("output");
 
-const rating$ = fromEvent(input, "input").pipe(map(e => e.target.value));
+const rating$ = fromEvent(schoolMark, "input").pipe(map(e => e.target.value));
 
-const type$ = fromEvent(select, "change").pipe(map(e => e.target.value));
+const type$ = fromEvent(markType, "change").pipe(map(e => e.target.value));
 
 var control = combineLatest(rating$, type$)
   .pipe(switchMap(getResources))
   .subscribe(render);
 
-function getResources([rating, resource]) {
-  console.log("sono entarto nella funzione 1");
+function getResources([userId, resourcePath]) {
   return ajax(
-    `https://jsonplaceholder.typicode.com/${resource}?userId=${rating}`
+    `https://jsonplaceholder.typicode.com/${resourcePath}?userId=${userId}`
   );
 }
 
