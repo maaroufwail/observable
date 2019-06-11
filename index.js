@@ -23,7 +23,7 @@ combineLatest([rating$, type$, retry$]) //prendo gli ultimi valori emessi dagli 
 function getResources([userId, resourcePath]) {
   let child = output.lastElementChild;
   while (child) {
-    output.removeChild(child);
+    output.removeChild(child); //pulizia della pagina
     child = output.lastElementChild;
   }
   loader.style.display = "block";
