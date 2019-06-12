@@ -6,10 +6,10 @@ const schoolMark = document.querySelector("input");
 const markType = document.querySelector("select");
 const output = document.querySelector("output");
 const loader = document.querySelector(".loader");
-const button = document.querySelector(".control");
+const buttonForError = document.querySelector(".control");
 const err = new Error("not found");
 
-const retry$ = fromEvent(button, "click").pipe(startWith(undefined));
+const retry$ = fromEvent(buttonForError, "click").pipe(startWith(undefined));
 const rating$ = fromEvent(schoolMark, "input").pipe(map(e => e.target.value));
 const type$ = fromEvent(markType, "change").pipe(map(e => e.target.value));
 
@@ -50,7 +50,7 @@ function render(data) {
     const h2 = document.createElement("h2");
     h2.textContent = "error please retry";
     article.appendChild(h2);
-    button.disabled = false;
+    buttonForError.disabled = false;
   } else {
     for (const post of data.response) {
       const h1 = document.createElement("h1");
